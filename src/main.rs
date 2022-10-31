@@ -5,18 +5,22 @@ use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let _pattern = &args[1];
+    let search_pattern = &args[1];
     let urls = &args[2..args.len()];
 
-    let hrefs = job_urls(urls);
-    println!("{:?}",hrefs);
+    let job_urls = extract_job_urls(urls);
+    for job_url in job_urls {
+        if site_contains_search_pattern(&job_url, search_pattern) {
+            println!("Pattern found in: {}", job_url);
+        }
+    }
 }
 
 pub fn get_html(url: &str) -> Result<String, Error> {
     return reqwest::blocking::get(url)?.text();
 }
 
-pub fn job_urls(urls: &[String]) -> Vec<String> {
+pub fn extract_job_urls(urls: &[String]) -> Vec<String> {
     let mut res: Vec<String> = Vec::new();
     for url in urls {
         let html = get_html(url);
@@ -39,4 +43,9 @@ pub fn is_candidate(url_option: Option<&str>) -> bool {
             .next()
             .unwrap()
             .is_uppercase();
+}
+
+pub fn site_contains_search_pattern(url: &str, search_pattern: &str) -> bool {
+    let html = get_html(url);
+    return html.unwrap().contains(search_pattern);
 }
