@@ -8,7 +8,7 @@ fn main() {
     let _pattern = &args[1];
     let urls = &args[2..args.len()];
 
-    let hrefs = extract_urls(urls);
+    let hrefs = job_urls(urls);
     println!("{:?}",hrefs);
 }
 
@@ -16,7 +16,7 @@ pub fn get_html(url: &str) -> Result<String, Error> {
     return reqwest::blocking::get(url)?.text();
 }
 
-pub fn extract_urls(urls: &[String]) -> Vec<String> {
+pub fn job_urls(urls: &[String]) -> Vec<String> {
     let mut res: Vec<String> = Vec::new();
     for url in urls {
         let html = get_html(url);
