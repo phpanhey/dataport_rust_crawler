@@ -3,5 +3,5 @@ a crawler to parse a url f.g. 'https://karriere.dataport.de/stellenangebote.html
 # usage 
 `./dataport_rust_crawler {search_pattern} url_1 url_2`
 ```shell
-./dataport_rust_crawler "<strong>Bremen<strong>" "https://karriere.dataport.de/stellenangebote.html" "https://karriere.dataport.de/stellenangebote.html?start=100"
+./dataport_rust_crawler "<strong>Bremen</strong>" "https://karriere.dataport.de/stellenangebote.html" "https://karriere.dataport.de/stellenangebote.html?start=100"
 ```

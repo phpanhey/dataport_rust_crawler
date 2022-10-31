@@ -3,7 +3,7 @@ use select::document::Document;
 use select::predicate::Name;
 use std::env;
 
-/// 
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     let search_pattern = &args[1];
