@@ -10,11 +10,15 @@ fn main() {
     let urls = &args[2..args.len()];
 
     let job_urls = extract_job_urls(urls);
+    let mut cntr = 0;
     for job_url in job_urls {
         if site_contains_search_pattern(&job_url, search_pattern) {
+            cntr += 1;
             println!("Pattern found in: {}", job_url);
         }
     }
+    println!("\nThere were {} matches", cntr);
+
 }
 
 pub fn get_html(url: &str) -> Result<String, Error> {
